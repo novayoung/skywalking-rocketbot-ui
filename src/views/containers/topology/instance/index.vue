@@ -69,7 +69,7 @@ limitations under the License. -->
   import { Action, Getter, State, Mutation } from 'vuex-class';
   import { readFile } from '@/utils/readFile';
   import { saveFile } from '@/utils/saveFile';
-  import { ObjectsType } from '../../../constant';
+  import { ObjectsType } from '../../../../constants/constant';
 
   interface Instance {
     label: string;
@@ -93,6 +93,7 @@ limitations under the License. -->
     @Action('GET_SERVICE_INSTANCES') private GET_SERVICE_INSTANCES: any;
     @Action('MIXHANDLE_CHANGE_GROUP_WITH_CURRENT') private MIXHANDLE_CHANGE_GROUP_WITH_CURRENT: any;
     @Mutation('SET_EDIT') private SET_EDIT: any;
+    @Mutation('SET_CURRENT_SERVICE') private SET_CURRENT_SERVICE: any;
     @Prop() private current!: { key: number | string; label: number | string };
     @Prop() private instanceComps: any;
     @Prop() private updateObjects!: string;
@@ -102,6 +103,7 @@ limitations under the License. -->
     }
 
     private beforeMount() {
+      this.SET_CURRENT_SERVICE(this.current);
       this.MIXHANDLE_CHANGE_GROUP_WITH_CURRENT({ index: 0, current: 3 });
       this.GET_SERVICE_INSTANCES({ duration: this.durationTime, serviceId: this.current.key }).then(() => {
         this.selectInstance(this.stateDashboardOption.instances[0]);
