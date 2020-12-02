@@ -84,7 +84,7 @@ limitations under the License. -->
             {
               top: '20%',
               height: '60%',
-              name: this.$t('service'),
+              name: 'Les Miserables',
               type: 'graph',
               layout: 'circular',
               circular: {

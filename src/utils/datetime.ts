@@ -16,7 +16,6 @@
  */
 
 import { Duration } from '@/types/global';
-import { TimeType } from '@/constants/constant';
 
 /**
  * init or generate durationRow Obj and save localStorage.
@@ -35,7 +34,7 @@ const getDurationRow = (): Duration => {
     durationRow = {
       start: new Date(new Date().getTime() - 900000),
       end: new Date(),
-      step: TimeType.MINUTE_TIME,
+      step: 'MINUTE',
     };
     localStorage.setItem('durationRow', JSON.stringify(durationRow, null, 0));
   }

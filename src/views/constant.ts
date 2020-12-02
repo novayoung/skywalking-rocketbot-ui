@@ -25,9 +25,3 @@ export enum ObjectsType {
   UPDATE_ENDPOINTS = 'UPDATE_ENDPOINTS',
   UPDATE_DASHBOARD = 'UPDATE_DASHBOARD',
 }
-
-export enum TimeType {
-  MINUTE_TIME = 'MINUTE',
-  HOUR_TIME = 'HOUR',
-  DAY_TIME = 'DAY',
-}

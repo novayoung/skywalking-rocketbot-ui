@@ -68,7 +68,7 @@ limitations under the License. -->
   import dayjs from 'dayjs';
 
   import { QueryTypes } from './constant';
-  import { TopologyType, ObjectsType } from '../../../constants/constant';
+  import { TopologyType, ObjectsType } from '../../constant';
   import { MetricsType, CalculationType } from './charts/constant';
   import { uuid } from '@/utils/uuid.ts';
 
@@ -134,64 +134,27 @@ limitations under the License. -->
           return;
         }
         this.itemConfig = params[0].config;
-        const { queryMetricType, chartType } = this.itemConfig;
+        const { queryMetricType } = this.itemConfig;
         let data = params;
-        if (queryMetricType === QueryTypes.ReadMetricsValue /*&& chartType === 'ChartSlow'*/) {
-          const arr: any = [
-            {
-              config: this.itemConfig,
-              [QueryTypes.ReadMetricsValue]: params.map((item, index) => {
-                return {
-                  id: index,
-                  name: item.metricName,
-                  value: item[QueryTypes.ReadMetricsValue],
-                };
-              }),
-            },
-          ];
-          data = arr;
-        } else if (queryMetricType !== QueryTypes.ReadMetricsValues) {
+        if (queryMetricType !== QueryTypes.ReadMetricsValues) {
           data = [params[0]];
         }
         this.chartValue(data);
       });
     }
 
-    private handleChartSlowData(resVal: any, aggregation: any, aggregationNum: any) {
-      this.chartSource = (resVal || []).map((item: { value: number }) => {
-        return {
-          ...item,
-          value: this.aggregationValue({
-            data: item.value,
-            type: aggregation,
-            aggregationNum: Number(aggregationNum),
-          }),
-        };
-      });
-    }
     private chartValue(data: Array<{ metricName: string; [key: string]: any; config: any }>) {
       this.chartSource = {};
       for (const params of data) {
-        const { queryMetricType, aggregation, aggregationNum, metricLabels, labelsIndex, chartType } = params.config;
+        const { queryMetricType, aggregation, aggregationNum, metricLabels, labelsIndex } = params.config;
         const resVal = params[queryMetricType];
 
         if (queryMetricType === QueryTypes.ReadMetricsValue) {
-          if (chartType === 'ChartSlow') {
-            this.handleChartSlowData(resVal, aggregation, aggregationNum);
-          } else {
-            this.chartSource = (resVal || []).map((item: any) => {
-              return {
-                name: item.name,
-                avgNum: [CalculationType[4].value, CalculationType[5].value].includes(aggregation)
-                  ? this.formatDate({ data: item.value, type: aggregation, aggregationNum })
-                  : this.aggregationValue({
-                      data: item.value,
-                      type: aggregation,
-                      aggregationNum: Number(aggregationNum),
-                    }),
-              };
-            });
-          }
+          this.chartSource = {
+            avgNum: [CalculationType[4].value, CalculationType[5].value].includes(aggregation)
+              ? this.formatDate({ data: resVal, type: aggregation, aggregationNum })
+              : this.aggregationValue({ data: resVal, type: aggregation, aggregationNum: Number(aggregationNum) }),
+          };
         }
         if (queryMetricType === QueryTypes.ReadMetricsValues) {
           if (!(resVal && resVal.values)) {
@@ -204,7 +167,16 @@ limitations under the License. -->
           );
         }
         if (queryMetricType === QueryTypes.SortMetrics || queryMetricType === QueryTypes.ReadSampledRecords) {
-          this.handleChartSlowData(resVal, aggregation, aggregationNum);
+          this.chartSource = (resVal || []).map((item: { value: number }) => {
+            return {
+              ...item,
+              value: this.aggregationValue({
+                data: item.value,
+                type: aggregation,
+                aggregationNum: Number(aggregationNum),
+              }),
+            };
+          });
         }
         if (queryMetricType === QueryTypes.READHEATMAP) {
           const nodes = [] as any;

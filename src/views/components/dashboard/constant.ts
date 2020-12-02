@@ -19,7 +19,6 @@ export enum DASHBOARDTYPE {
   SERVICE = 'service',
   METRIC = 'metric',
   DATABASE = 'database',
-  BROWSER = 'browser',
 }
 export enum QueryTypes {
   ReadMetricsValue = 'readMetricsValue',

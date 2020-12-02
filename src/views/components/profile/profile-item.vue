@@ -15,11 +15,8 @@ limitations under the License. -->
 
 <template>
   <div>
-    <div :class="['profile-item', 'level' + data.parentId]" :style="{ color: data.topDur ? '#448dfe' : '#3d444f' }">
-      <div
-        :class="['thread', 'level' + data.parentId]"
-        :style="{ 'text-indent': data.parentId * 4 + 'px', width: `${thread}px` }"
-      >
+    <div :class="['profile-item', 'level' + data.parentId]" :style="{ color: data.topDur ? '#448dfe' : '#3d444f'}">
+      <div :class="['thread', 'level' + data.parentId]" :style="{ 'text-indent': data.parentId * 4 + 'px',width: `${thread}px`  }">
         <svg
           class="icon vm cp trans"
           :style="!displayChildren ? 'transform: rotate(-90deg);' : ''"
@@ -105,8 +102,8 @@ limitations under the License. -->
   }
   .profile-item div.exec-percent {
     width: 10%;
-    height: 30px;
-    padding: 0 8px;
+    padding-left: 8px;
+    padding-right: 8px;
     .outer-progress_bar {
       width: 100%;
       height: 6px;
