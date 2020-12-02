@@ -18,17 +18,7 @@
 export const Services = {
   variable: ['$duration: Duration!', '$keyword: String!'],
   query: `
-    services: getAllServices(duration: $duration, group: $keyword) {
-      key: id
-      label: name
-    }
-  `,
-};
-
-export const BrowserServices = {
-  variable: ['$duration: Duration!'],
-  query: `
-    services: getAllBrowserServices(duration: $duration) {
+    services: searchServices(duration: $duration, keyword: $keyword) {
       key: id
       label: name
     }

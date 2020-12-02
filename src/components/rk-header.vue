@@ -43,12 +43,6 @@ limitations under the License. -->
         </svg>
         <span class="vm hide-xs ml-5">{{ this.$t('profile') }}</span>
       </router-link>
-      <router-link class="nav-link mr-20" to="/log">
-        <svg class="icon sm vm">
-          <use xlink:href="#assignment"></use>
-        </svg>
-        <span class="vm hide-xs ml-5">{{ this.$t('log') }}</span>
-      </router-link>
       <router-link class="nav-link mr-20" to="/alarm">
         <svg class="icon sm vm">
           <use xlink:href="#spam"></use>
@@ -57,12 +51,7 @@ limitations under the License. -->
       </router-link>
     </div>
     <div class="flex-h">
-      <a
-        class="rk-btn mr-5 sm"
-        :class="auto ? 'blue' : 'ghost'"
-        @click="handleAuto"
-        v-tooltip:bottom="{ content: this.$t('timeReload') }"
-      >
+      <a class="rk-btn mr-5 sm" :class="auto ? 'blue' : 'ghost'" @click="handleAuto">
         <span class="vm">{{ this.$t('auto') }}</span>
       </a>
       <div class="auto-time">
@@ -101,9 +90,6 @@ limitations under the License. -->
       this.SET_DURATION(timeFormat(time));
     }
     private handleAuto() {
-      if (this.autoTime < 1) {
-        return;
-      }
       this.auto = !this.auto;
       if (this.auto) {
         this.handleReload();
@@ -123,9 +109,6 @@ limitations under the License. -->
       this.$router.push('/login');
     }
     private changeAutoTime() {
-      if (this.autoTime < 1) {
-        return;
-      }
       clearInterval(this.timer);
       if (this.auto) {
         this.handleReload();

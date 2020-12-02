@@ -316,7 +316,6 @@ limitations under the License. -->
 
     private removeTags(index: number) {
       this.tagsList.splice(index, 1);
-      localStorage.setItem('traceTags', JSON.stringify(this.tagsList));
     }
 
     @Watch('rocketbotGlobal.durationRow')

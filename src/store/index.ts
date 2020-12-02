@@ -25,7 +25,6 @@ import rocketTopoGroup, { State as TopoGroupState } from '@/store/modules/topolo
 import rocketTrace, { State as TraceState } from '@/store/modules/trace';
 import rocketAlarm, { State as AlarmState } from '@/store/modules/alarm';
 import profileStore, { State as ProfileState } from '@/store/modules/profile/profile-store';
-import rocketLog, { State as LogState } from '@/store/modules/log';
 
 Vue.use(Vuex);
 
@@ -38,7 +37,6 @@ export interface State {
   rocketTrace: TraceState;
   rocketAlarm: AlarmState;
   profileStore: ProfileState;
-  logStore: LogState;
 }
 
 export default new Vuex.Store({
@@ -51,6 +49,5 @@ export default new Vuex.Store({
     rocketTrace,
     rocketAlarm,
     profileStore,
-    rocketLog,
   },
 });

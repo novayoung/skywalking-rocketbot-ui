@@ -24,7 +24,6 @@ import Trace from './views/containers/trace.vue';
 import Topology from './views/containers/topology/topology.vue';
 import Alarm from './views/containers/alarm.vue';
 import Profile from './views/containers/profile.vue';
-import Log from './views/containers/log.vue';
 
 Vue.use(Router);
 window.axiosCancel = [];
@@ -62,10 +61,6 @@ const router = new Router({
         {
           path: 'profile',
           component: Profile,
-        },
-        {
-          path: 'log',
-          component: Log,
         },
       ],
     },

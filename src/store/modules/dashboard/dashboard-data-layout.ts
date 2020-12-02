@@ -33,7 +33,7 @@ export const initState: State = {
   tree: [
     {
       name: '',
-      serviceGroup: '',
+      serviceFilter: '',
       type: 'service',
       query: {
         service: {},
@@ -69,8 +69,8 @@ const mutations: MutationTree<State> = {
     state.group = current;
     state.current = 0;
   },
-  [types.SET_CURRENT_SERVICE_GROUP](state: State, serviceGroup: string) {
-    state.tree.splice(state.group, 1, Object.assign(state.tree[state.group], { serviceGroup }));
+  [types.SET_CURRENT_SERVICE_FILTER](state: State, serviceFilter: string) {
+    state.tree.splice(state.group, 1, Object.assign(state.tree[state.group], { serviceFilter }));
     window.localStorage.setItem('dashboard', JSON.stringify(state.tree));
   },
   [types.SET_CURRENT_GROUP_WITH_CURRENT](state: State, { index, current = 0 }: { index: number; current: number }) {
